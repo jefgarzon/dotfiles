@@ -1,3 +1,5 @@
+let mapleader = "\<Space>"
+
 call plug#begin()
 Plug 'preservim/nerdtree'
 Plug '/usr/local/opt/fzf'
@@ -31,6 +33,9 @@ set foldlevel=99
 set encoding=utf8
 "set guifont=Hack\ Nerd\ Font:h14
 filetype plugin indent on
+
+"Vim git blame
+nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
 "On Save
 autocmd BufWritePre * :%s/\s\+$//e
