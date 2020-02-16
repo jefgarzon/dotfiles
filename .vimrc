@@ -36,6 +36,9 @@ set statusline+=%F
 set foldmethod=indent
 set foldlevel=99
 set encoding=utf8
+set tags=./.git/tags,tags;
+set undofile
+set undodir=~/.vimundo/
 "set guifont=Hack\ Nerd\ Font:h14
 filetype plugin indent on
 autocmd FileType ruby setl omnifunc=syntaxcomplete#Complete
