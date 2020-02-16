@@ -14,6 +14,8 @@ Plug 'zivyangll/git-blame.vim'
 "Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
 Plug 'elzr/vim-json'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'pangloss/vim-javascript'
 call plug#end()
 
 "Prettier Config
@@ -34,17 +36,9 @@ set statusline+=%F
 set foldmethod=indent
 set foldlevel=99
 set encoding=utf8
-set tags=./.git/tags,tags;
 "set guifont=Hack\ Nerd\ Font:h14
 filetype plugin indent on
 autocmd FileType ruby setl omnifunc=syntaxcomplete#Complete
-
-"Disable delete and backspace on insert mode (hard mode)
-inoremap <BS> <Nop>
-inoremap <Del> <Nop>
-
-nnoremap <BS> <Nop>
-nnoremap <Del> <Nop>
 
 " Remove newbie crutches in Command Mode
 cnoremap <Down> <Nop>
@@ -73,6 +67,9 @@ vnoremap <Up> <Nop>
 "Numbers
 set number relativenumber
 set nu rnu
+
+"Esc hack
+inoremap jj <Esc>
 
 "Vim git blame
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
