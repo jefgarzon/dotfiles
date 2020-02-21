@@ -14,8 +14,6 @@ Plug 'zivyangll/git-blame.vim'
 "Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
 Plug 'elzr/vim-json'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'pangloss/vim-javascript'
 call plug#end()
 
 "Prettier Config
@@ -39,6 +37,7 @@ set encoding=utf8
 set tags=./.git/tags,tags;
 set undofile
 set undodir=~/.vimundo/
+set backspace=
 "set guifont=Hack\ Nerd\ Font:h14
 filetype plugin indent on
 autocmd FileType ruby setl omnifunc=syntaxcomplete#Complete
@@ -70,9 +69,6 @@ vnoremap <Up> <Nop>
 "Numbers
 set number relativenumber
 set nu rnu
-
-"Esc hack
-inoremap jj <Esc>
 
 "Vim git blame
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
