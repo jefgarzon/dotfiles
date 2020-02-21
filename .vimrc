@@ -14,6 +14,8 @@ Plug 'zivyangll/git-blame.vim'
 "Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
 Plug 'elzr/vim-json'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'pangloss/vim-javascript'
 call plug#end()
 
 "Prettier Config
