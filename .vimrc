@@ -16,11 +16,33 @@ Plug 'tpope/vim-endwise'
 Plug 'elzr/vim-json'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'pangloss/vim-javascript'
+Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
+
+"Tinymode maps
+nmap          <C-W>+     <C-W>+<SID>ws
+nmap          <C-W>-     <C-W>-<SID>ws
+nn <script>   <SID>ws+   <C-W>+<SID>ws
+nn <script>   <SID>ws-   <C-W>-<SID>ws
+nmap          <C-W><     <C-W><<SID>ws
+nmap          <C-W>>     <C-W>><SID>ws
+nn <script>   <SID>ws<   <C-W><<SID>ws
+nn <script>   <SID>ws>   <C-W>><SID>ws
+nmap          <SID>ws    <Nop>
 
 "Prettier Config
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.rb,*.yaml,*.js Prettier
+autocmd BufWritePre *.yaml,*.js Prettier
+
+"tiny mode config
+let tinym_ex_modes = 'cytab,winsize,less'
+
+" Persistent undo
+set undodir=~/.vim/undo/
+set undolevels=1000
+set undoreload=10000
+set undofile
 
 "General Config
 syntax on
@@ -37,8 +59,7 @@ set foldmethod=indent
 set foldlevel=99
 set encoding=utf8
 set tags=./.git/tags,tags;
-set undofile
-set undodir=~/.vimundo/
+
 set backspace=
 "set guifont=Hack\ Nerd\ Font:h14
 filetype plugin indent on
@@ -78,11 +99,21 @@ nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 "vim json conceal workaround
 let g:vim_json_syntax_conceal = 0
 
+"rust config
+let g:rustfmt_autosave = 1
+
 "On Save
-autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre *.rb,*.js,*.yaml :%s/\s\+$//e
+
+"copy filename/path to clipboard
+nmap ,cs :let @*=expand("%")<CR>
+nmap ,cl :let @*=expand("%:p")<CR>
 
 map <C-n> :NERDTreeToggle<CR>
 map <C-p> :GitFiles<CR>
+nnoremap <C-f> :Rg<Cr>
 
 set rtp+=/usr/local/opt/fzf
 
+"indentation rules
+autocmd FileType markdown setl shiftwidth=4 tabstop=4
