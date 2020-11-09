@@ -59,6 +59,8 @@ set foldmethod=indent
 set foldlevel=99
 set encoding=utf8
 set tags=./.git/tags,tags;
+set incsearch
+set hlsearch
 
 set backspace=
 "set guifont=Hack\ Nerd\ Font:h14
@@ -102,8 +104,8 @@ let g:vim_json_syntax_conceal = 0
 "rust config
 let g:rustfmt_autosave = 1
 
-"On Save
-autocmd BufWritePre *.rb,*.js,*.yaml :%s/\s\+$//e
+"Remove blank spaces at end of line
+autocmd BufWritePre *.rb,*.js,*.jsx,*.yaml :%s/\s\+$//e
 
 "copy filename/path to clipboard
 nmap ,cs :let @*=expand("%")<CR>
