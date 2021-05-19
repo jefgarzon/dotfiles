@@ -2,7 +2,7 @@ let mapleader = "\<Space>"
 
 call plug#begin()
 Plug 'preservim/nerdtree'
-Plug 'prettier/vim-prettier', { 'do': 'npm install', 'branch': 'release/1.x' }
+Plug 'prettier/vim-prettier', { 'do': 'npm install', 'branch': 'release/2.x' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 Plug 'stephpy/vim-yaml'
@@ -61,6 +61,7 @@ set encoding=utf8
 set tags=./.git/tags,tags;
 set incsearch
 set hlsearch
+set mmp=5000
 
 set backspace=
 "set guifont=Hack\ Nerd\ Font:h14
@@ -104,15 +105,19 @@ let g:vim_json_syntax_conceal = 0
 "rust config
 let g:rustfmt_autosave = 1
 
-"Remove blank spaces at end of line
+"Before Save
 autocmd BufWritePre *.rb,*.js,*.jsx,*.yaml :%s/\s\+$//e
 
 "copy filename/path to clipboard
-nmap ,cs :let @*=expand("%")<CR>
-nmap ,cl :let @*=expand("%:p")<CR>
+nnoremap ,cs :let @*=expand("%")<CR>
+nnoremap ,cl :let @*=expand("%:p")<CR>
 
-map <C-n> :NERDTreeToggle<CR>
-map <C-p> :GitFiles<CR>
+"NERDTree
+nnoremap <silent> <expr> <C-n> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
+nnoremap <C-@> :NERDTreeFind<CR>
+
+"FuzzyFile
+noremap <C-p> :GitFiles<CR>
 nnoremap <C-f> :Rg<Cr>
 
 set rtp+=/usr/local/opt/fzf
