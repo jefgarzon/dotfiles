@@ -117,7 +117,7 @@ nnoremap <silent> <expr> <C-n> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : buf
 nnoremap <C-@> :NERDTreeFind<CR>
 
 "FuzzyFile
-noremap <C-p> :GitFiles<CR>
+noremap <C-p> :Files<CR>
 nnoremap <C-f> :Rg<Cr>
 
 set rtp+=/usr/local/opt/fzf
