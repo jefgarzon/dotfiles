@@ -7,6 +7,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 Plug 'stephpy/vim-yaml'
 Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rbenv'
+Plug 'tpope/vim-bundler'
 Plug 'ryanoasis/vim-devicons'
 Plug 'yggdroot/indentline'
 Plug 'ngmy/vim-rubocop'
@@ -16,8 +19,10 @@ Plug 'tpope/vim-endwise'
 Plug 'elzr/vim-json'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'misterbuckley/vim-definitive'
 call plug#end()
 
 "Tinymode maps
@@ -33,7 +38,7 @@ nmap          <SID>ws    <Nop>
 
 "Prettier Config
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.yaml,*.js Prettier
+autocmd BufWritePre *.ruby,*.yaml,*.js,*.jsx,*.scss Prettier
 
 "tiny mode config
 let tinym_ex_modes = 'cytab,winsize,less'
@@ -105,12 +110,12 @@ let g:vim_json_syntax_conceal = 0
 "rust config
 let g:rustfmt_autosave = 1
 
-"Before Save
-autocmd BufWritePre *.rb,*.js,*.jsx,*.yaml :%s/\s\+$//e
+"On Save
+autocmd BufWritePre *.rb,*.js,*.yaml,*.jsx,*.scss :%s/\s\+$//e
 
 "copy filename/path to clipboard
-nnoremap ,cs :let @*=expand("%")<CR>
-nnoremap ,cl :let @*=expand("%:p")<CR>
+nmap ,cs :let @+=expand("%")<CR>
+nmap ,cl :let @+=expand("%:p")<CR>
 
 "NERDTree
 nnoremap <silent> <expr> <C-n> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
@@ -124,3 +129,7 @@ set rtp+=/usr/local/opt/fzf
 
 "indentation rules
 autocmd FileType markdown setl shiftwidth=4 tabstop=4
+
+"Vim Find Definition Plugin
+nnoremap <Leader>d :FindDefinition<CR> " Normal mode
+vnoremap <Leader>d "ay:FindDefinition <C-R>a<CR> " Visual mode
