@@ -55,7 +55,7 @@ set number
 set tabstop=2
 set shiftwidth=2
 set expandtab
-set list lcs=eol:·
+set list lcs=eol:·,tab:\ \ 
 set nowrap
 set cursorline
 set laststatus=2
