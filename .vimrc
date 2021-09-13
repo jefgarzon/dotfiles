@@ -10,7 +10,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rbenv'
 Plug 'tpope/vim-bundler'
-Plug 'ryanoasis/vim-devicons'
 Plug 'yggdroot/indentline'
 Plug 'ngmy/vim-rubocop'
 Plug 'zivyangll/git-blame.vim'
@@ -23,6 +22,11 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'misterbuckley/vim-definitive'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 "Tinymode maps
@@ -38,7 +42,7 @@ nmap          <SID>ws    <Nop>
 
 "Prettier Config
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.ruby,*.yaml,*.js,*.jsx,*.scss Prettier
+autocmd BufWritePre *.rb,*.yaml,*.js,*.jsx,*.scss Prettier
 
 "tiny mode config
 let tinym_ex_modes = 'cytab,winsize,less'
@@ -62,8 +66,7 @@ set laststatus=2
 set statusline+=%F
 set foldmethod=indent
 set foldlevel=99
-set encoding=utf8
-set tags=./.git/tags,tags;
+set encoding=UTF-8
 set incsearch
 set hlsearch
 set mmp=5000
