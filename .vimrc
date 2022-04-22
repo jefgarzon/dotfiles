@@ -23,7 +23,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'misterbuckley/vim-definitive'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'ludovicchabant/vim-gutentags'
+"Plug 'ludovicchabant/vim-gutentags'
 Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ryanoasis/vim-devicons'
@@ -42,7 +42,7 @@ nmap          <SID>ws    <Nop>
 
 "Prettier Config
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.rb,*.yaml,*.js,*.jsx,*.scss Prettier
+autocmd BufWritePre *.yaml,*.js,*.jsx,*.scss Prettier
 
 "tiny mode config
 let tinym_ex_modes = 'cytab,winsize,less'
@@ -77,10 +77,10 @@ filetype plugin indent on
 autocmd FileType ruby setl omnifunc=syntaxcomplete#Complete
 
 " Remove newbie crutches in Command Mode
-cnoremap <Down> <Nop>
-cnoremap <Left> <Nop>
-cnoremap <Right> <Nop>
-cnoremap <Up> <Nop>
+" cnoremap <Down> <Nop>
+" cnoremap <Left> <Nop>
+" cnoremap <Right> <Nop>
+" cnoremap <Up> <Nop>
 
 " Remove newbie crutches in Insert Mode
 inoremap <Down> <Nop>
@@ -127,6 +127,12 @@ nnoremap <C-@> :NERDTreeFind<CR>
 "FuzzyFile
 noremap <C-p> :Files<CR>
 nnoremap <C-f> :Rg<Cr>
+inoremap <expr> <C-x><C-f> fzf#vim#complete#path('rg --files')
+inoremap <expr> <C-x><C-l> fzf#vim#complete(fzf#wrap({
+  \ 'prefix': '^.*$',
+  \ 'source': 'rg -n ^ --color always',
+  \ 'options': '--ansi --delimiter : --nth 3..',
+  \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
 
 set rtp+=/usr/local/opt/fzf
 
@@ -136,3 +142,6 @@ autocmd FileType markdown setl shiftwidth=4 tabstop=4
 "Vim Find Definition Plugin
 nnoremap <Leader>d :FindDefinition<CR> " Normal mode
 vnoremap <Leader>d "ay:FindDefinition <C-R>a<CR> " Visual mode
+
+"autocomplete sources
+set complete-=i
