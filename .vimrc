@@ -134,6 +134,8 @@ inoremap <expr> <C-x><C-l> fzf#vim#complete(fzf#wrap({
   \ 'options': '--ansi --delimiter : --nth 3..',
   \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
 
+nnoremap <silent> <Leader>F :Rg <C-R><C-W><CR>
+
 set rtp+=/usr/local/opt/fzf
 
 "indentation rules
