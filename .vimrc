@@ -142,6 +142,7 @@ set rtp+=/usr/local/opt/fzf
 autocmd FileType markdown setl shiftwidth=4 tabstop=4
 
 "Vim Find Definition Plugin
+let $FZF_DEFAULT_COMMAND='rg --files --hidden'
 nnoremap <Leader>d :FindDefinition<CR> " Normal mode
 vnoremap <Leader>d "ay:FindDefinition <C-R>a<CR> " Visual mode
 
