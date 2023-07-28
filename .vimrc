@@ -27,6 +27,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'neoclide/coc.nvim'
+Plug 'Jorengarenar/fauxClip'
+Plug 'dense-analysis/ale'
 call plug#end()
 
 "Tinymode maps
@@ -41,8 +44,8 @@ nn <script>   <SID>ws>   <C-W>><SID>ws
 nmap          <SID>ws    <Nop>
 
 "Prettier Config
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.yaml,*.js,*.jsx,*.scss Prettier
+"let g:prettier#autoformat = 0
+"autocmd BufWritePre *.yaml,*.js,*.jsx,*.scss Prettier
 
 "tiny mode config
 let tinym_ex_modes = 'cytab,winsize,less'
@@ -117,8 +120,13 @@ let g:rustfmt_autosave = 1
 autocmd BufWritePre *.rb,*.js,*.yaml,*.jsx,*.scss :%s/\s\+$//e
 
 "copy filename/path to clipboard
-nmap ,cs :let @+=expand("%")<CR>
-nmap ,cl :let @+=expand("%:p")<CR>
+"
+"nmap ,cs :let @+=expand("%")<CR>
+"nmap ,cl :let @+=expand("%:p")<CR>
+"
+"following is workaround for WSL
+nmap ,cs :call system(fauxClip_copy_cmd, expand("%"))<CR>
+nmap ,cl :call system(fauxClip_copy_cmd, expand("%:p"))<CR>
 
 "NERDTree
 nnoremap <silent> <expr> <C-n> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
@@ -148,3 +156,19 @@ vnoremap <Leader>d "ay:FindDefinition <C-R>a<CR> " Visual mode
 
 "autocomplete sources
 set complete-=i
+
+"coc.nvim
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<Tab>"
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+"ALE
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['eslint']
+let g:ale_fix_on_save = 1
+
+"json.erb
+autocmd BufNewFile,BufRead *.json.erb set syntax=ruby
